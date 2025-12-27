@@ -45,12 +45,10 @@ namespace Tennis
 
         private string GetWinningScore()
         {
-            var winnerPlayer = GetWinnerPlayer();
-            
             if (IsDifferenceMoreThanOnePoint())
-                return "Win for " + winnerPlayer;
+                return "Win for " + GetWinnerPlayer();
             else
-                return "Advantage " + winnerPlayer;
+                return "Advantage " + GetWinnerPlayer();
         }
 
         private bool IsDifferenceMoreThanOnePoint()
