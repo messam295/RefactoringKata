@@ -46,17 +46,16 @@ namespace Tennis
         private string GetWinningScore()
         {
             var winnerPlayer = GetWinnerPlayer();
-            var differenceInResult = m_score1 - m_score2;
-
-            if (IsDifferenceMoreThanOnePoint(differenceInResult))
+            
+            if (IsDifferenceMoreThanOnePoint())
                 return "Win for " + winnerPlayer;
             else
                 return "Advantage " + winnerPlayer;
         }
 
-        private static bool IsDifferenceMoreThanOnePoint(int differenceInResult)
+        private bool IsDifferenceMoreThanOnePoint()
         {
-            return Math.Abs(differenceInResult) > 1;
+            return Math.Abs(m_score1 - m_score2) > 1;
         }
 
         private string GetWinnerPlayer()
