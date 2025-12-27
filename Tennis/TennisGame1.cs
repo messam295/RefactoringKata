@@ -29,8 +29,8 @@ namespace Tennis
             {
                 return GetDrawScore();
             }
-            
-            if (m_score1 > (int)ScoreName.Forty || m_score2 > (int)ScoreName.Forty)
+
+            if (AnyPlayerExceedsForty())
             {
                 return GetWinningScore();
             }
@@ -38,17 +38,25 @@ namespace Tennis
             return $"{Enum.GetName(typeof(ScoreName), m_score1)}-{Enum.GetName(typeof(ScoreName), m_score2)}";
         }
 
+        private bool AnyPlayerExceedsForty()
+        {
+            return m_score1 > (int)ScoreName.Forty || m_score2 > (int)ScoreName.Forty;
+        }
+
         private string GetWinningScore()
         {
             var winnerPlayer = GetWinnerPlayer();
             var differenceInResult = m_score1 - m_score2;
 
-            bool isDifferenceMoreThanOnePoint = Math.Abs(differenceInResult) > 1;
-
-            if (isDifferenceMoreThanOnePoint)
+            if (IsDifferenceMoreThanOnePoint(differenceInResult))
                 return "Win for " + winnerPlayer;
             else
                 return "Advantage " + winnerPlayer;
+        }
+
+        private static bool IsDifferenceMoreThanOnePoint(int differenceInResult)
+        {
+            return Math.Abs(differenceInResult) > 1;
         }
 
         private string GetWinnerPlayer()
