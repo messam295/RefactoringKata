@@ -68,15 +68,15 @@ namespace Tennis
 
         private string GetDrawScore()
         {
-            string score = Enum.GetName(typeof(ScoreName), m_score1);
-            var deuceScore = ScoreName.Deuce.ToString();
+            string scoreName = Enum.GetName(typeof(ScoreName), m_score1);
+            var deuceScore = "Deuce";
 
-            if (string.IsNullOrEmpty(score) || score.Equals(deuceScore))
+            if (string.IsNullOrEmpty(scoreName) || scoreName.Equals(ScoreName.Forty.ToString()))
             {
                 return deuceScore;
             }
 
-            return score + "-All";
+            return scoreName + "-All";
         }
     }
 }
