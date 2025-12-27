@@ -29,9 +29,10 @@ namespace Tennis
             var tempScore = 0;
             if (m_score1 == m_score2)
             {
-                score = GetDrawScore();
+                return GetDrawScore();
             }
-            else if (m_score1 >= 4 || m_score2 >= 4)
+            
+            if (m_score1 >= 4 || m_score2 >= 4)
             {
                 var minusResult = m_score1 - m_score2;
                 if (minusResult == 1) score = "Advantage player1";
