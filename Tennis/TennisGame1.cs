@@ -25,7 +25,6 @@ namespace Tennis
 
         public string GetScore()
         {
-
             if (m_score1 == m_score2)
             {
                 return GetDrawScore();
@@ -33,18 +32,23 @@ namespace Tennis
             
             if (m_score1 > (int)ScoreName.Forty || m_score2 > (int)ScoreName.Forty)
             {
-                var winnerPlayer = m_score1 > m_score2 ? player1Name : player2Name;
-                var differenceInResult = m_score1 - m_score2;
-
-                if (Math.Abs(differenceInResult) > 1)
-                {
-                    return "Win for " + winnerPlayer;
-                }
-             
-                return "Advantage " + winnerPlayer;
+                return GetWinningScore();
             }
 
             return $"{Enum.GetName(typeof(ScoreName), m_score1)}-{Enum.GetName(typeof(ScoreName), m_score2)}";
+        }
+
+        private string GetWinningScore()
+        {
+            var winnerPlayer = m_score1 > m_score2 ? player1Name : player2Name;
+            var differenceInResult = m_score1 - m_score2;
+
+            bool isDifferenceMoreThanOnePoint = Math.Abs(differenceInResult) > 1;
+
+            if (isDifferenceMoreThanOnePoint)
+                return "Win for " + winnerPlayer;
+            else
+                return "Advantage " + winnerPlayer;
         }
 
         private string GetDrawScore()
