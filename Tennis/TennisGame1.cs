@@ -40,7 +40,7 @@ namespace Tennis
 
         private string GetWinningScore()
         {
-            var winnerPlayer = m_score1 > m_score2 ? player1Name : player2Name;
+            var winnerPlayer = GetWinnerPlayer();
             var differenceInResult = m_score1 - m_score2;
 
             bool isDifferenceMoreThanOnePoint = Math.Abs(differenceInResult) > 1;
@@ -49,6 +49,11 @@ namespace Tennis
                 return "Win for " + winnerPlayer;
             else
                 return "Advantage " + winnerPlayer;
+        }
+
+        private string GetWinnerPlayer()
+        {
+            return m_score1 > m_score2 ? player1Name : player2Name;
         }
 
         private string GetDrawScore()
