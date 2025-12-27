@@ -35,7 +35,7 @@ namespace Tennis
                 return GetWinningScore();
             }
 
-            return $"{Enum.GetName(typeof(ScoreName), m_score1)}-{Enum.GetName(typeof(ScoreName), m_score2)}";
+            return $"{GetScoreName(m_score1)}-{GetScoreName(m_score2)}";
         }
 
         private bool AnyPlayerExceedsForty()
@@ -63,15 +63,17 @@ namespace Tennis
 
         private string GetDrawScore()
         {
-            string scoreName = Enum.GetName(typeof(ScoreName), m_score1);
-            var deuceScore = "Deuce";
-
-            if (string.IsNullOrEmpty(scoreName) || scoreName.Equals(ScoreName.Forty.ToString()))
+            if (m_score1 >= (int)ScoreName.Forty)
             {
-                return deuceScore;
+                return "Deuce";
             }
 
-            return scoreName + "-All";
+            return GetScoreName(m_score1) + "-All";
+        }
+
+        private string GetScoreName(int score)
+        {
+            return Enum.GetName(typeof(ScoreName), score);
         }
     }
 }
