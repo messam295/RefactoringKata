@@ -1,3 +1,5 @@
+using System;
+
 namespace Tennis
 {
     public class TennisGame1 : ITennisGame
@@ -27,22 +29,7 @@ namespace Tennis
             var tempScore = 0;
             if (m_score1 == m_score2)
             {
-                switch (m_score1)
-                {
-                    case 0:
-                        score = "Love-All";
-                        break;
-                    case 1:
-                        score = "Fifteen-All";
-                        break;
-                    case 2:
-                        score = "Thirty-All";
-                        break;
-                    default:
-                        score = "Deuce";
-                        break;
-
-                }
+                score = GetDrawScore();
             }
             else if (m_score1 >= 4 || m_score2 >= 4)
             {
@@ -76,6 +63,19 @@ namespace Tennis
                 }
             }
             return score;
+        }
+
+        private string GetDrawScore()
+        {
+            string score = Enum.GetName(typeof(ScoreName), m_score1);
+            var deuceScore = ScoreName.Deuce.ToString();
+
+            if (string.IsNullOrEmpty(score) || score.Equals(deuceScore))
+            {
+                return deuceScore;
+            }
+
+            return score + "-All";
         }
     }
 }
